@@ -1,0 +1,91 @@
+<html>
+<body>
+  <h1>Lista de tarefas</h1>
+  <div id="task">
+    <input type="text" id="inputTask" placeholder="Criar nova tarefa">
+    <button type="button" onclick="newElement()">Adicionar</button>
+  </div>
+  <ul id="taskList">
+  </ul>
+<script>
+  var count = 0;
+  var ss = 0;
+  var mm = 0;
+  var hh = 0;
+  var Interval;
+
+  function startStop(param) {
+    clearInterval(Interval);
+    Interval = setInterval(function() { timer(param); }, 100);
+    console.log('Interval', Interval)
+    
+  }
+
+  // Create a new list item when clicking on the "Add" button
+  function newElement() {
+    count++;
+    var li = document.createElement("li");
+    var inputValue = document.getElementById("inputTask").value;
+    var t = document.createTextNode(inputValue);
+    li.appendChild(t);
+    if (inputValue === '') {
+      alert("Você não pode incluir uma tarefa vazia!");
+    } else {
+      document.getElementById("taskList").appendChild(li);
+    }
+    document.getElementById("inputTask").value = "";
+
+    var para = document.createElement("p");
+    var node = document.createTextNode("00:00:00");
+    const idPara = "id_"+count
+    para.setAttribute("id", idPara);
+    para.appendChild(node);
+    li.appendChild(para);
+
+    var button = document.createElement("button");
+    var nodeButton = document.createTextNode("start/stop");
+    button.setAttribute("type", "button");
+    button.onclick = () => startStop(idPara);
+    button.appendChild(nodeButton);
+    li.appendChild(button);
+
+    var span = document.createElement("span");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+  }
+
+  function timer(param) {
+    ss = ss + 1;
+
+    if (ss == 59) { //Verifica se deu 59 segundos
+      ss = 0;//Volta os segundos para 0
+      mm = mm + 1;//Adiciona +1 na variável mm
+
+      if (mm == 59) { //Verifica se deu 59 minutos
+        mm = 0;//Volta os minutos para 0
+        hh = hh + 1;//Adiciona +1 na variável hora
+      }
+    }
+
+    //Cria uma variável com o valor tratado HH:MM:SS
+    let format = (hh < 10 ? '0' + hh : hh) + ':' + (mm < 10 ? '0' + mm : mm) + ':' + (ss < 10 ? '0' + ss : ss);
+    //let format = hh + ':' + mm + ':' + ss;
+    //console.log('param', param);
+    console.log('format', format);
+    document.getElementById(param).innerHTML = format;
+    return format;
+    
+    
+  }
+</script>
+</body>
+</html>
