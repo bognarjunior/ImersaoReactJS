@@ -21,7 +21,6 @@
     
   }
 
-  // Create a new list item when clicking on the "Add" button
   function newElement() {
     count++;
     var li = document.createElement("li");
@@ -66,25 +65,19 @@
   function timer(param) {
     ss = ss + 1;
 
-    if (ss == 59) { //Verifica se deu 59 segundos
-      ss = 0;//Volta os segundos para 0
-      mm = mm + 1;//Adiciona +1 na variável mm
+    if (ss == 59) {
+      ss = 0;
+      mm = mm + 1;
 
-      if (mm == 59) { //Verifica se deu 59 minutos
-        mm = 0;//Volta os minutos para 0
-        hh = hh + 1;//Adiciona +1 na variável hora
+      if (mm == 59) {
+        mm = 0;
+        hh = hh + 1;
       }
     }
 
-    //Cria uma variável com o valor tratado HH:MM:SS
     let format = (hh < 10 ? '0' + hh : hh) + ':' + (mm < 10 ? '0' + mm : mm) + ':' + (ss < 10 ? '0' + ss : ss);
-    //let format = hh + ':' + mm + ':' + ss;
-    //console.log('param', param);
-    console.log('format', format);
     document.getElementById(param).innerHTML = format;
     return format;
-    
-    
   }
 </script>
 </body>
